@@ -35,15 +35,27 @@ go test ./...
 ```sh
 # drop 应用 + tracker（前端已嵌入；同目录存在 shareweb/ 时优先读盘，便于调试）
 droprelay -addr 127.0.0.1:8791
-
-# 做种站模式：share 文件根目录即 webseed（建议再配反代 + TLS）
-droprelay -addr 127.0.0.1:8791 -webroot /srv/share -mfile /srv/manifest.json
-
-# 生成做种站清单（增量：未变文件复用，不重新哈希）
-droprelay -manifest /srv/share -out /srv/manifest.json
 ```
 
 房间闲置 2h / 存活 6h 自动回收；对码探测、建房均有限速；`GET /api/health` 探活，`GET /api/log` 看内存日志（建议反代对公网封掉）。
+
+## shareweb：目录做种站
+
+`shareweb/` 是同一内核的第二个前端：Caddy file_server browse 观感的目录列表，把一个静态目录变成「路由器供第一份，下载过的人互为 peer」的做种站。与 drop 应用同一二进制、同一端口，靠主机名分流——`-webroot` 启用后，`Host` 以 `share.` 开头的请求走做种站，其余照旧走 drop 应用（反代上把 `share.example.com` 与主域指向同一监听即可）。
+
+```sh
+# ① 生成清单：逐文件一个 .torrent（增量：path+size+mtime 未变直接复用，不重哈希）
+droprelay -manifest /srv/share -out /srv/share/manifest.json
+
+# ② 带根目录运行（建议反代 + TLS）
+droprelay -addr 127.0.0.1:8791 -webroot /srv/share -mfile /srv/share/manifest.json
+```
+
+- **站点根即 webseed**：URL 指向存在的文件就带访问日志直出——这条 URL 就是 webseed 本身，页面里的下载与任何 HTTP 客户端直访是同一条；目录路径渲染做种页，`?zip=1` 流式打包整个目录（Store 不压缩，服务器零临时文件）。
+- **清单与站点解耦**：种子默认不烙 announce 和 url-list，由前端按当前站点根动态给出——换域名、换基准不废清单，只需重跑一遍 `-manifest`（未变文件不重新哈希）。
+- **页面交互**：左键文件行 = P2P 下载（进度画在 sizebar 上）；Ctrl / 中键 / 长按 = 直链；JS 失效时整页退化为纯直链列表，等同旧 Caddy。
+- **单一下载源**：本机整文件 → 其他 peer（tracker 说有人在种）→ 站点顺序 HTTP → 浏览器自带下载，一次只走一条路，绝不 P2P 与 HTTP Range 同时打机械盘。
+- **按需入池**：空手访客不向 tracker 报任何 leech，种子只在真的点下载时才 announce；share 主机上 `/api/*` 一律 404（单放 `/api/health`，前端靠它拿 P2P 等待窗）。
 
 ## STUN/TURN（跨 NAT 部署才需要）
 
