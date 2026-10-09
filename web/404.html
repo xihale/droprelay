@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F4F4F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141416" media="(prefers-color-scheme: dark)">
+<title>404</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23191B1E'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23E28A00'/%3E%3C/svg%3E">
+<style>
+  /* 自包含：404 页不许再依赖任何会 404 的资源 */
+  :root {
+    --paper: #F4F4F1;
+    --ink: #191B1E;
+    --ink2: #5D6167;
+    --line: #C9CAC3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #141416;
+      --ink: #F3F4F6;
+      --ink2: #9CA3AF;
+      --line: #3F424A;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { text-align: center; padding: 0 24px; }
+  .code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-weight: 700;
+    font-size: clamp(56px, 14vw, 96px);
+    letter-spacing: .06em;
+    line-height: 1;
+  }
+  p { margin-top: 16px; color: var(--ink2); font-size: 15px; }
+  a {
+    display: inline-block;
+    margin-top: 32px;
+    color: var(--ink);
+    font-size: 15px;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  a:hover { border-color: var(--ink); }
+</style>
+</head>
+<body>
+<main>
+  <div class="code">404</div>
+  <p>这个地址什么都没有</p>
+  <a href="/">回首页</a>
+</main>
+</body>
+</html>

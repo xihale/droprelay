@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fafdfb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191c1c" media="(prefers-color-scheme: dark)">
+<title>share</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect rx='8' width='32' height='32' fill='%23006a63'/%3E%3Cpath d='M8 12.5h6l2 2H24a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z' fill='%2372f7ea'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/app/style.css">
+</head>
+<body>
+
+<div class="shell">
+  <header class="top">
+    <form class="search" role="search" action="" onsubmit="return false">
+      <svg class="search-ic" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="search" id="filter" placeholder="搜索" aria-label="搜索文件或目录" autocomplete="off" enterkeyhint="search">
+      <button type="button" id="search-clear" class="icon-btn" hidden aria-label="清除">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+      </button>
+    </form>
+    <button type="button" id="swarm-btn" class="chip" hidden title="本机做种"></button>
+  </header>
+
+  <nav id="crumbs" aria-label="路径" hidden></nav>
+
+  <div class="toolbar">
+    <p id="summary"></p>
+    <button type="button" id="dl-dir" class="btn-tonal" hidden>取走此夹</button>
+  </div>
+
+  <ul id="rows" class="list"></ul>
+</div>
+
+<div id="snack" class="snack" hidden role="status"></div>
+
+<dialog id="swarm-panel" aria-labelledby="panel-title">
+  <div class="panel-head">
+    <div class="panel-head-text">
+      <h2 id="panel-title">做种</h2>
+      <p class="panel-quota" id="panel-quota"></p>
+    </div>
+    <button type="button" class="icon-btn" id="panel-close" aria-label="关闭">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <ul id="panel-list"></ul>
+  <p id="panel-junk" class="panel-junk" hidden></p>
+  <div class="panel-actions">
+    <button type="button" id="panel-clear" class="btn-text">删除全部</button>
+  </div>
+</dialog>
+
+<script src="/app/app.bundle.js"></script>
+</body>
+</html>

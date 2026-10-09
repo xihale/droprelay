@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4F4F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141416" media="(prefers-color-scheme: dark)">
+<title>drop</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23191B1E'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23E28A00'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main>
+  <div class="inner">
+
+    <div class="iab" id="iab" hidden>
+      <span id="iabMsg"></span>
+      <button id="iabCopy" type="button">复制链接</button>
+    </div>
+
+    <div class="codezone" id="codezone" aria-label="传送码">
+      <div class="slots" id="slots" aria-hidden="true"></div>
+      <input id="codeInput" type="text" lang="en" inputmode="text" enterkeyhint="done"
+             autocomplete="off" autocapitalize="characters" autocorrect="off"
+             spellcheck="false" writing-suggestions="false" aria-label="输入 6 位传送码">
+    </div>
+
+    <p class="hint" id="hint" role="status" aria-live="polite" hidden></p>
+    <span class="vh" id="copyStatus" role="status" aria-live="polite"></span>
+
+    <button class="dl" id="btnAll" hidden>下载</button>
+
+    <section class="list" id="list" hidden aria-label="文件列表">
+      <div class="rows" id="rows"></div>
+      <div class="done" id="doneArea" hidden>
+        <div class="done-head"></div>
+        <div class="rows" id="doneRows"></div>
+      </div>
+    </section>
+
+    <button class="pick" id="btnPick" aria-label="添加文件，右键或长按添加文件夹">
+      <svg class="plus" viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="29" height="29" rx="3.2" fill="none" stroke="currentColor" stroke-width="1.75"/>
+        <path d="M16 10v12M10 16h12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square"/>
+      </svg>
+    </button>
+
+  </div>
+</main>
+
+<input type="file" id="fileInput" multiple hidden>
+<input type="file" id="dirInput" webkitdirectory multiple hidden>
+
+<script src="app.bundle.js"></script>
+</body>
+</html>

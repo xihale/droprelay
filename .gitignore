@@ -1,0 +1,23 @@
+node_modules/
+web/app.bundle.js
+shareweb/app.bundle.js
+
+# 本地私有部署配置（自托管 STUN/TURN 凭据），模板见 scripts/local.env.example
+scripts/local.env
+
+# 构建产物
+droprelay
+droprelay-arm64
+droprelay-dev
+droprelay-stun
+droprelay-linux-arm64
+droprelay-stun-linux-arm64
+tmp/
+
+# 内部工作文档与工具（不入库）
+.git-private-history/
+PRODUCT.md
+DESIGN.md
+.air.toml
+.impeccable/
+audit-context/
